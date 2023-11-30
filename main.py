@@ -19,9 +19,9 @@ logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
 try:
-    DERIBIT_SECRET = os.environ["DERIBITSECRET"]
+    DERIBITSECRET = os.environ["DERIBITSECRET"]
 except KeyError:
-    DERIBIT_SECRET = "Token not available!"
+    DERIBITSECRET = "Token not available!"
     logger.info("Token not available!")
 
 def run_automation():
@@ -36,5 +36,5 @@ def run_automation():
     data.to_csv("options_data.csv", index=False)
 
 if __name__ == "__main__":
-    logger.info(f"Token value: {DERIBIT_SECRET}")
+    logger.info(f"Token value: {DERIBITSECRET}")
     run_automation()
