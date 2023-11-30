@@ -25,7 +25,7 @@ jobs:
 
       - name: execute py script # run main.py
         env:
-          SOME_SECRET: DERIBITSECRET
+          DERIBITSECRET: ${{ secrets.DERIBITSECRET }}
       
         run: python main.py
 
@@ -35,9 +35,10 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -A
           git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
-
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: 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
+          github_token: ${{ secrets.DERIBITSECRET}}
           branch: main
+
+          
