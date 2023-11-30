@@ -3,7 +3,7 @@ name: run main.py
 on:
   schedule:
     - cron: '0 */4 * * *'  # Déclencher toutes les 4 heures
-
+    workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
