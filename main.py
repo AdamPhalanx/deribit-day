@@ -1,7 +1,9 @@
 import logging
 import logging.handlers
 import os
-
+from datetime import datetime
+import time
+from Options import Options
 import requests
 
 logger = logging.getLogger(__name__)
@@ -17,18 +19,22 @@ logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
 try:
-    SOME_SECRET = os.environ["SOME_SECRET"]
+    DERIBIT_SECRET = os.environ["DERIBIT_SECRET"]
 except KeyError:
-    SOME_SECRET = "Token not available!"
-    #logger.info("Token not available!")
-    #raise
+    DERIBIT_SECRET = "Token not available!"
+    logger.info("Token not available!")
 
+def run_automation():
+    # Initialisez la classe Options avec votre devise (par exemple, "BTC" ou "ETH")
+    options_data = Options(currency="BTC")
+
+    # Collectez les données
+    data = options_data.collect_data(save_csv=True)
+    logger.info("Data collection completed at", datetime.now())
+
+    # Ajoutez cette ligne pour sauvegarder le DataFrame en tant que fichier CSV
+    data.to_csv("options_data.csv", index=False)
 
 if __name__ == "__main__":
-    logger.info(f"Token value: {DERIBITSECRET}")
-
-    r = requests.get('https://weather.talkpython.fm/api/weather/?city=Berlin&country=DE')
-    if r.status_code == 200:
-        data = r.json()
-        temperature = data["forecast"]["temp"]
-        logger.info(f'Weather in Berlin: {temperature}')
+    logger.info(f"Token value: {DERIBIT_SECRET}")
+    run_automation()
