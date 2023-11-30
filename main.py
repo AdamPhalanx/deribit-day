@@ -19,7 +19,7 @@ logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
 try:
-    DERIBIT_SECRET = os.environ["DERIBIT_SECRET"]
+    DERIBIT_SECRET = os.environ["DERIBITSECRET"]
 except KeyError:
     DERIBIT_SECRET = "Token not available!"
     logger.info("Token not available!")
